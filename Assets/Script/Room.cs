@@ -5,7 +5,6 @@ using UnityEngine;
 public class Room
 {
     /* roomNumber
-     * 0 : 배정되지않은곳
      * 1 : 일반방
      * 2 : 시작방
      * 3 : 보스방
@@ -38,4 +37,12 @@ public class Room
     {
         roomNumber = after;
     }
+
+    public void RoomGenerator()
+    {
+        // 방사이즈가 같으니 
+        // localPosition을 활용해서 오브젝트 와 몬스터 배치..
+        // 설치할 오브젝트와 몬스터는 매개변수로 받아오기 ?
+    }
+
 }
