@@ -1,0 +1,5 @@
+Camera Inspector
+-> Camera Component
+-> Projection => Orthographic
+-> Size => 3.1
+-> Clipping Planes -> Near => -20 , Far => 20
