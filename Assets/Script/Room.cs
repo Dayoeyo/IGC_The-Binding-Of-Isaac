@@ -5,8 +5,8 @@ using UnityEngine;
 public class Room
 {
     /* roomNumber
-     * 1 : 일반방
-     * 2 : 시작방
+     * 1 : 시작방
+     * 2 : 일반방
      * 3 : 보스방
      * 4 : 상점방
      * 5 : 황금방
@@ -14,35 +14,21 @@ public class Room
      * roomNumber 변수의 수치에 맞춰서 방 오브젝트 배치.
      */
 
-    private int roomNumber; // 방 종류 번호
-    public int RoomNumber
-    { get { return roomNumber; } }
-    private bool isClear; // 방 클리어 여부
-    public bool IsClear
-    { get { return isClear; } }
+    public int roomNumber; // 방 종류 번호
+    public bool isClear; // 방 클리어 여부
 
-    public Room(int _number , bool _clear) // Room 생성자
+    //현재 방의 위치
+    public int Y;
+    public int X;
+    public Room(int _number,int y, int x) // Room 생성자
     {
         roomNumber = _number;
-        isClear = _clear;
-    }
-
-    public void ResetRoom() // Room 초기화
-    {
-        roomNumber = 0;
-        isClear = false;
+        Y = y;
+        X = x;
     }
 
     public void ChangeRoom(int after)
     {
         roomNumber = after;
     }
-
-    public void RoomGenerator()
-    {
-        // 방사이즈가 같으니 
-        // localPosition을 활용해서 오브젝트 와 몬스터 배치..
-        // 설치할 오브젝트와 몬스터는 매개변수로 받아오기 ?
-    }
-
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class StageGenerator : MonoBehaviour
 {
     int[] dy = new int[4] { -1, 0, 1, 0 };
     int[] dx = new int[4] { 0, 1, 0, -1 };
@@ -21,14 +21,11 @@ public class MapGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            CreateMap(GameManager.instance.stageSize); // show
-        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetMap();
             CreateStage(); // 생성
+            CreateMap(GameManager.instance.stageSize); // show
         }
     }
 
@@ -65,7 +62,7 @@ public class MapGenerator : MonoBehaviour
         int midY = size / 2; // 중앙
         int midX = size / 2; // 중앙
 
-        stageArr[midY, midX] = new Room(2, true); // 시작방 설정
+        stageArr[midY, midX] = new Room(1,midY, midX); // 시작방 설정
 
         Queue<KeyValuePair<int, int>> q = new Queue<KeyValuePair<int, int>>(); // {y,x}
         q.Enqueue(new KeyValuePair<int, int>(midY, midX));
@@ -96,7 +93,7 @@ public class MapGenerator : MonoBehaviour
                     if (randomValue == 0) // 랜덤하게 생성한 수가 0이면 
                         continue; // 생성하지않는다.
 
-                    stageArr[ny, nx] = new Room(1, false); // 방번호 1번으로 방생성
+                    stageArr[ny, nx] = new Room(2,ny,nx); // 방번호 2번으로 방생성 ( 일반방 )
                     roomCount++;
                     q.Enqueue(new KeyValuePair<int, int>(ny, nx)); // q에 담아주기.
 
@@ -145,32 +142,32 @@ public class MapGenerator : MonoBehaviour
             {
                 if (stageArr[i, j] == null) // 방없는곳
                 {   }
-                else if (stageArr[i, j].RoomNumber == 1) // 일반방
+                else if (stageArr[i, j].roomNumber == 1) // 일반방
                 {
                     GameObject obj = Instantiate(roomPrefabs[0], createRoomPosition, Quaternion.identity, stagePool) as GameObject;
                     roomList.Add(obj);
                 }
-                else if (stageArr[i, j].RoomNumber == 2) // 시작방
+                else if (stageArr[i, j].roomNumber == 2) // 시작방
                 {
                     GameObject obj = Instantiate(roomPrefabs[1], createRoomPosition, Quaternion.identity, stagePool) as GameObject;
                     roomList.Add(obj);
                 }
-                else if (stageArr[i, j].RoomNumber == 3) // 보스방
+                else if (stageArr[i, j].roomNumber == 3) // 보스방
                 {
                     GameObject obj = Instantiate(roomPrefabs[2], createRoomPosition, Quaternion.identity, stagePool) as GameObject;
                     roomList.Add(obj);
                 }
-                else if (stageArr[i, j].RoomNumber == 4) // 상점방
+                else if (stageArr[i, j].roomNumber == 4) // 상점방
                 {
                     GameObject obj = Instantiate(roomPrefabs[3], createRoomPosition, Quaternion.identity, stagePool) as GameObject;
                     roomList.Add(obj);
                 }
-                else if (stageArr[i, j].RoomNumber == 5) // 황금방
+                else if (stageArr[i, j].roomNumber == 5) // 황금방
                 {
                     GameObject obj = Instantiate(roomPrefabs[4], createRoomPosition, Quaternion.identity, stagePool) as GameObject;
                     roomList.Add(obj);
                 }
-                else if (stageArr[i, j].RoomNumber == 6) // 달방
+                else if (stageArr[i, j].roomNumber == 6) // 달방
                 {
                     GameObject obj = Instantiate(roomPrefabs[5], createRoomPosition, Quaternion.identity, stagePool) as GameObject;
                     roomList.Add(obj);
@@ -190,7 +187,7 @@ public class MapGenerator : MonoBehaviour
         {
             for(int j = 0; j < size; j++)
             {
-                if (stageArr[i, j] == null || stageArr[i,j].RoomNumber == 2) // 방이없는곳 or 시작방이면 continue;
+                if (stageArr[i, j] == null || stageArr[i,j].roomNumber == 1) // 방이없는곳 or 시작방이면 continue;
                     continue;
 
                 int adj = CheckAbjRoom(i, j, size);
@@ -213,8 +210,6 @@ public class MapGenerator : MonoBehaviour
             }
 
             int randNumber = Random.Range(0, temp.Count);
-            // temp[randNumber].Key  : Y
-            // temp[randNumber].value  : X
             stageArr[temp[randNumber].Key, temp[randNumber].Value].ChangeRoom(roomNumber[i]);
             temp.RemoveAt(randNumber);
         }
