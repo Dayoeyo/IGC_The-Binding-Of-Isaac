@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public Room[,] StageStructure;
+
     public int stage; // 현재 스테이지 1 ~ 4
     public int stageSize; // 스테이지 사이즈
     public int minimunRoomCount; // 스테이지 방 최소개수

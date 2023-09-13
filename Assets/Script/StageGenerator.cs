@@ -7,7 +7,7 @@ public class StageGenerator : MonoBehaviour
     int[] dy = new int[4] { -1, 0, 1, 0 };
     int[] dx = new int[4] { 0, 1, 0, -1 };
 
-    Room[,] stageArr; // 스테이지 구조
+    //Room[,] GameManager.instance.StageStructure; // 스테이지 구조
     List<GameObject> roomList; // 생성된 방들을 관리해줄 리스트
 
     [Header("Unity SetUp")]
@@ -43,7 +43,7 @@ public class StageGenerator : MonoBehaviour
         int stageSize = GameManager.instance.stageSize;
 
         // 스테이지 구조 초기화.
-        stageArr = new Room[stageSize, stageSize];
+        GameManager.instance.StageStructure = new Room[stageSize, stageSize];
 
         // 스테이지 생성이 잘못되었을때 리롤
         int cnt = 10;
@@ -56,7 +56,7 @@ public class StageGenerator : MonoBehaviour
                     break;
                 }
             }
-            stageArr = new Room[stageSize, stageSize]; // 배열 초기화
+            GameManager.instance.StageStructure = new Room[stageSize, stageSize]; // 배열 초기화
         }
     }
 
@@ -67,7 +67,7 @@ public class StageGenerator : MonoBehaviour
         int midY = size / 2; // 중앙
         int midX = size / 2; // 중앙
 
-        stageArr[midY, midX] = new Room(1); // 시작방 설정
+        GameManager.instance.StageStructure[midY, midX] = new Room(1); // 시작방 설정
 
         Queue<KeyValuePair<int, int>> q = new Queue<KeyValuePair<int, int>>(); // {y,x}
         q.Enqueue(new KeyValuePair<int, int>(midY, midX));
@@ -86,7 +86,7 @@ public class StageGenerator : MonoBehaviour
 
                 if (ny < 0 || nx < 0 || ny >= size || nx >= size) // 범위밖 continue;
                     continue;
-                if(stageArr[ny,nx] == null) //생성하지않은방이라면
+                if(GameManager.instance.StageStructure[ny,nx] == null) //생성하지않은방이라면
                 {
                     // 방을 생성할 위치에 인접한 방의 개수 
                     int adjCnt = CheckAbjRoom(ny, nx, size);
@@ -98,7 +98,7 @@ public class StageGenerator : MonoBehaviour
                     if (randomValue == 0) // 랜덤하게 생성한 수가 0이면 
                         continue; // 생성하지않는다.
 
-                    stageArr[ny, nx] = new Room(2); // 방번호 1번으로 방생성 ( 일반 )
+                    GameManager.instance.StageStructure[ny, nx] = new Room(2); // 방번호 1번으로 방생성 ( 일반 )
                     roomCount++;
                     q.Enqueue(new KeyValuePair<int, int>(ny, nx)); // q에 담아주기.
 
@@ -121,7 +121,7 @@ public class StageGenerator : MonoBehaviour
             if (ny < 0 || nx < 0 || ny >= size || nx >= size) // 범위밖 continue
                 continue;
 
-            if (stageArr[ny, nx] == null)
+            if (GameManager.instance.StageStructure[ny, nx] == null)
                 continue;
 
             ret++;
@@ -145,7 +145,7 @@ public class StageGenerator : MonoBehaviour
         {
             for (int j = 0; j < size; j++)
             {
-                if (stageArr[i, j] == null) // 방없는곳
+                if (GameManager.instance.StageStructure[i, j] == null) // 방없는곳
                 {   }
                 else if (stageArr[i, j].roomNumber == 1) // 일반방
                 {
@@ -217,7 +217,7 @@ public class StageGenerator : MonoBehaviour
             int randNumber = Random.Range(0, temp.Count);
             // temp[randNumber].Key  : Y
             // temp[randNumber].value  : X
-            stageArr[temp[randNumber].Key, temp[randNumber].Value].ChangeRoom(roomNumber[i]);
+            GameManager.instance.StageStructure[temp[randNumber].Key, temp[randNumber].Value].ChangeRoom(roomNumber[i]);
             temp.RemoveAt(randNumber);
         }
         return true;
