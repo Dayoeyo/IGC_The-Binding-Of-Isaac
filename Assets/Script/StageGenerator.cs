@@ -172,10 +172,10 @@ public class StageGenerator : MonoBehaviour
                     GameObject obj = Instantiate(roomPrefabs[5], createRoomPosition, Quaternion.identity, stagePool) as GameObject;
                     roomList.Add(obj);
                 }
-                createRoomPosition += new Vector3(10, 0, 0);
+                createRoomPosition += new Vector3(15, 0, 0);
             }
             createRoomPosition = new Vector3(0, createRoomPosition.y, 0);
-            createRoomPosition += new Vector3(0, -7, 0);
+            createRoomPosition += new Vector3(0, -10, 0);
         }
     }
     bool SelectRoom(int size)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1884c3437a3d05a439dd671ac304b94a
+guid: f00de6016715b1449a21f96e9ae72c51
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -94,19 +94,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PC Computer - The Binding of Isaac Rebirth - Doors_0
+      name: basement_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 474
-        width: 49
-        height: 34
+        y: 365
+        width: 233
+        height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d8d340313c29144fb8c3dfed6f9cb7a
-      internalID: -2103815516
+      spriteID: 2e25437dfe43b374d82f67ba3d5f1cea
+      internalID: -1437332673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC Computer - The Binding of Isaac Rebirth - Doors_1
+      name: basement_1
       rect:
         serializedVersion: 2
-        x: 76
-        y: 478
-        width: 25
-        height: 23
+        x: 0
+        y: 209
+        width: 233
+        height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a8614e0ddce058469bacb6224b3cde8
-      internalID: 1141834191
+      spriteID: 8084893edc57e1246bd815df93a5c61d
+      internalID: 143100370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC Computer - The Binding of Isaac Rebirth - Doors_2
+      name: basement_2
       rect:
         serializedVersion: 2
-        x: 83
-        y: 382
-        width: 18
-        height: 23
+        x: 234
+        y: 365
+        width: 233
+        height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5005bfb008001a41b2e358f33841ccf
-      internalID: -917599572
+      spriteID: 5789e2c5dd820a44ea7dd3b46719f510
+      internalID: 346805916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC Computer - The Binding of Isaac Rebirth - Doors_3
+      name: basement_3
       rect:
         serializedVersion: 2
-        x: 11
-        y: 430
-        width: 14
-        height: 23
+        x: 234
+        y: 209
+        width: 233
+        height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,29 +187,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e15da8a0758c4a34f957697292659c58
-      internalID: -1445089869
+      spriteID: 28cafb22bbcd00c4b88af907d6dd7161
+      internalID: -153842685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC Computer - The Binding of Isaac Rebirth - Doors_4
+      name: basement_4
       rect:
         serializedVersion: 2
-        x: 88
-        y: 430
-        width: 14
-        height: 23
+        x: 53
+        y: 53
+        width: 180
+        height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb6f1374601a78a4bbece5fe3932c1e1
-      internalID: 665278668
+      spriteID: 715439d4e49ba9644a531444bcede137
+      internalID: 1884159370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basement_5
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 53
+        width: 180
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0eac152eaebbcb42b2abf4b07458467
+      internalID: 554720015
       vertices: []
       indices: 
       edges: []
@@ -230,7 +238,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: efad66537038d7040a10d5ec7c9c1c53
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -238,11 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PC Computer - The Binding of Isaac Rebirth - Doors_0: -2103815516
-      PC Computer - The Binding of Isaac Rebirth - Doors_1: 1141834191
-      PC Computer - The Binding of Isaac Rebirth - Doors_2: -917599572
-      PC Computer - The Binding of Isaac Rebirth - Doors_3: -1445089869
-      PC Computer - The Binding of Isaac Rebirth - Doors_4: 665278668
+      basement_0: -1437332673
+      basement_1: 143100370
+      basement_2: 346805916
+      basement_3: -153842685
+      basement_4: 835894839
+      basement_5: 1884159370
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
