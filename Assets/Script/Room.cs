@@ -27,13 +27,4 @@ public class Room
     {
         roomNumber = after;
     }
-<<<<<<< Updated upstream
-=======
-
-    public void RoomGenerator()
-    {
-        
-    }
-
->>>>>>> Stashed changes
 }
