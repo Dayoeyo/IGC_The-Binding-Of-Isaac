@@ -2,33 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room
+public class Room : MonoBehaviour
 {
-    /* roomNumber
-     * 1 : 시작방
-     * 2 : 일반방
-     * 3 : 보스방
-     * 4 : 상점방
-     * 5 : 황금방
-     * 6 : 달방
-     * roomNumber 변수의 수치에 맞춰서 방 오브젝트 배치.
-     */
+    public bool isClear = false;
+    public bool playerInRoom = false;
+    public Transform[] roomObjects;
 
-    public int roomNumber; // 방 종류 번호
-    public bool isClear; // 방 클리어 여부
+    [Header("Unity Setup")]
+    public Transform roomGrid;
+    public Transform cameraPosition;
+    public Transform[] doorPosition;
+    public Transform[] movePosition;
 
-    //현재 방의 위치
-    public int Y;
-    public int X;
-    public Room(int _number,int y, int x) // Room 생성자
+    private void Update()
     {
-        roomNumber = _number;
-        Y = y;
-        X = x;
+        if(playerInRoom)
+        {
+            CameraSetting();
+        }
     }
 
-    public void ChangeRoom(int after)
+    void CameraSetting()
     {
-        roomNumber = after;
+        GameManager.instance.myCamera.transform.SetParent(cameraPosition);
+        GameManager.instance.myCamera.transform.localPosition = new Vector3(0, 0, 0); 
+    }
+
+    public void SetGrid()
+    {
+        roomObjects = new Transform[roomGrid.transform.childCount]; // grid 개수만큼  배열 선언.
+        for(int i = 0; i < roomObjects.Length; i++)
+        {
+            roomObjects[i] = roomGrid.GetChild(i);
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            playerInRoom = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInRoom = false;
+        }
     }
 }

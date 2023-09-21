@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    #region 싱글톤
+    #region singleTon
     public static GameManager instance;
     private void Awake()
     {
@@ -15,36 +15,70 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public int stage; // 현재 스테이지 1 ~ 4
-    public int stageSize; // 스테이지 사이즈
-    public int minimunRoomCount; // 스테이지 방 최소개수
+    public int stageLevel; // 현재 스테이지 레벨
+    public int stageSize;  // 스테이지 크기
+    public int stageMinimunRoom; // 스테이지 방 최소개수
+
+    [Header("Unity Setup")]
+    public StageGenerate stageGenerate;
+    public RoomGenerate roomGenerate;
+    public GameObject myCamera;
 
     private void Start()
     {
-        stage = 1; // 스테이지 초기값 1
-        SetStage(); // 첫 스테이지 세팅
+        SetStage(1);
+        roomGenerate.SetPrefabs();
     }
 
-
-    public void SetStage() 
+    void Update()
     {
-        switch(stage)
+        // 스테이지 생성 테스트.
+        // R키 누르기 -> 스테이지 시작시로 변경 할것.
+        if(Input.GetKeyDown(KeyCode.R)) 
         {
-            case 1:
+            StageStart();
+        }
+    }
+
+    void StageStart()
+    {
+        // Create stage/room
+        int cnt = 10;
+        while (cnt-- > 0)
+        {
+            if (stageGenerate.CreateStage(stageSize, stageMinimunRoom))
+            {
+                roomGenerate.ClearRoom(); // room reset -> create
+                roomGenerate.CreateRoom(stageLevel, stageSize); // room create
+                break;
+            }
+        }
+    }
+
+    void SetStage(int stage)
+    {
+        stageLevel = stage;
+        switch(stageLevel)
+        {
+            case 1: // 1스테이지
                 stageSize = 5;
-                minimunRoomCount = 8;
+                stageMinimunRoom = 8;
                 break;
-            case 2:
+            case 2: // 2스테이지
                 stageSize = 5;
-                minimunRoomCount = 8;
+                stageMinimunRoom = 8;
                 break;
-            case 3:
+            case 3: // 3스테이지
                 stageSize = 7;
-                minimunRoomCount = 10;
+                stageMinimunRoom = 10;
                 break;
-            case 4:
+            case 4: // 4스테이지
                 stageSize = 7;
-                minimunRoomCount = 12;
+                stageMinimunRoom = 12;
+                break;
+            default:
+                stageSize = 5;
+                stageMinimunRoom = 8;
                 break;
         }
     }
