@@ -95,8 +95,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movePosition: {fileID: 0}
   roomInfo: {fileID: 0}
+  doorDir: -1
   closeDoor: {fileID: 7329769872951605806}
   openDoor: {fileID: 4026567365581991824}
+  doorKey: 1
 --- !u!1 &2546728891684527857
 GameObject:
   m_ObjectHideFlags: 0

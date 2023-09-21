@@ -7,9 +7,10 @@ public class RoomGenerate : MonoBehaviour
     int[] dy = new int[4] { -1, 0, 1, 0 };
     int[] dx = new int[4] { 0, 1, 0, -1 };
 
+    List<GameObject> doors; // 생성된 문 오브젝트들
 
     public GameObject[,] roomList; // 생성된 방 오브젝트들
-
+    
     public GameObject[,] roomPrefabs; // 방생성에 사용할 프래핍
 
     [Header("Unity Setup")]
@@ -45,6 +46,7 @@ public class RoomGenerate : MonoBehaviour
     public void ClearRoom()
     {
         roomList = null;
+        doors = new List<GameObject>();
         for(int i = 0; i < roomPool.childCount; i++)
         {
             Destroy(roomPool.GetChild(i).gameObject);
@@ -85,7 +87,6 @@ public class RoomGenerate : MonoBehaviour
             roomPos += new Vector3(0, -10, 0);
         }
 
-        // create door
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -99,31 +100,6 @@ public class RoomGenerate : MonoBehaviour
             }
         }
     }
-
-    void CreateObstacle(int y, int x, int roomNumber)
-    {
-        int idx = 0;
-        int[,] rdPattern = pattern.GetPattern(roomNumber); 
-        for(int i = 0; i < rdPattern.GetLength(0); i++)
-        {
-            for(int j = 0; j < rdPattern.GetLength(1); j++)
-            {
-                if (rdPattern[i, j] == 0)
-                {
-                    idx++;
-                    continue;
-                }
-                GameObject obstacle = Instantiate(objectPrefabs[rdPattern[i, j] - 1]) as GameObject;
-                obstacle.transform.SetParent(roomList[y, x].GetComponent<Room>().roomObjects[idx]);
-                obstacle.transform.localPosition = new Vector3(0, 0, 0);
-                idx++;
-
-                if (rdPattern[i, j] == 10) // 플레이어 오브젝트일때
-                    obstacle.transform.SetParent(null); 
-            }
-        }    
-    }
-
     public void CreateDoor(int y, int x)
     {
         for (int i = 0; i < 4; i++)
@@ -147,11 +123,18 @@ public class RoomGenerate : MonoBehaviour
             door.transform.localPosition = new Vector3(0, 0, 0);
             door.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
-            door.GetComponent<Door>().roomInfo = roomList[y, x];
-            door.GetComponent<Door>().movePosition = roomList[ny, nx].GetComponent<Room>().movePosition[i];
+            door.GetComponent<Door>().doorDir = i; // door dir
+
+            door.GetComponent<Door>().roomInfo = roomList[y, x]; // door in Room Info
+            door.GetComponent<Door>().movePosition = roomList[ny, nx].GetComponent<Room>().movePosition[i]; // door MovePosition 
+
+            int roomNum = GameManager.instance.stageGenerate.stageArr[y, x];
+            if (roomNum == 4 || roomNum == 5 || roomNum == 6)
+                door.GetComponent<Door>().UsingKey();
+
+            doors.Add(door);
         }
     }
-
     int ChoiceDoor(int y, int x, int ny, int nx)
     {
         int doorNum;
@@ -178,8 +161,44 @@ public class RoomGenerate : MonoBehaviour
 
         return doorNum;
     }
-    // 할일 1 
-    // 방 오브젝트 설치
-    // 방문 달아주기
-    //   - 방문 movePosition 지정.
+
+    void CreateObstacle(int y, int x, int roomNumber)
+    {
+        int idx = 0;
+        int[,] rdPattern = pattern.GetPattern(roomNumber); 
+        for(int i = 0; i < rdPattern.GetLength(0); i++)
+        {
+            for(int j = 0; j < rdPattern.GetLength(1); j++)
+            {
+                if (rdPattern[i, j] == 0)
+                {
+                    idx++;
+                    continue;
+                }
+                GameObject obstacle = Instantiate(objectPrefabs[rdPattern[i, j] - 1]) as GameObject;
+                obstacle.transform.SetParent(roomList[y, x].GetComponent<Room>().roomObjects[idx]);
+                obstacle.transform.localPosition = new Vector3(0, 0, 0);
+                idx++;
+
+                if (rdPattern[i, j] == 10) // 플레이어 오브젝트일때
+                {
+                    obstacle.transform.SetParent(null);
+                    GameManager.instance.playerObject = obstacle;
+                }
+            }
+        }    
+    }
+
+
+    private void Update()
+    {
+        if(doors != null)
+        {
+            for(int i = 0; i < doors.Count; i++)
+            {
+                doors[i].GetComponent<Door>().CheckedClear();
+            }
+        }
+    }
+
 }
