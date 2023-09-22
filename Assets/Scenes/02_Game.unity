@@ -325,6 +325,7 @@ MonoBehaviour:
   stageLevel: 0
   stageSize: 0
   stageMinimunRoom: 0
+  playerObject: {fileID: 0}
   stageGenerate: {fileID: 1043015904}
   roomGenerate: {fileID: 351783603}
   myCamera: {fileID: 926169540}

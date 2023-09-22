@@ -31,8 +31,6 @@ public class Door : MonoBehaviour
         doorKey = true;
     }
 
-
-
     public void OpenDoor()
     {
         closeDoor.SetActive(false);
@@ -50,7 +48,6 @@ public class Door : MonoBehaviour
         {
             if(collision.gameObject.CompareTag("Player") && doorKey) // 문에 부딪힌 대상이 플레이어라면
             {
-                // 문에 부딪힌상태에서 문 방향으로 이동하면 이동되도록 수정 해야함.
                 collision.transform.position = movePosition.transform.position; // 플레이어를 이동
             }
         }
